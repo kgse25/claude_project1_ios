@@ -46,7 +46,7 @@ const YouTubePlayer = (() => {
    * Создаёт плеер внутри элемента с id === elementId (элемент должен существовать
    * в DOM и быть пустым — YT.Player сам заменит его на <iframe>).
    */
-  async function create(elementId, videoId, startSeconds, { onEnded, onTimeUpdate } = {}) {
+  async function create(elementId, videoId, startSeconds, { onEnded, onTimeUpdate, onError } = {}) {
     await loadAPI();
     destroy();
 
@@ -69,6 +69,12 @@ const YouTubePlayer = (() => {
             stopTicking();
             if (onEnded) onEnded();
           }
+        },
+        onError(e) {
+          // 2 = неверный ID, 5 = ошибка HTML5-плеера, 100 = видео удалено/приватное,
+          // 101/150 = владелец канала запретил встраивание на сторонних сайтах.
+          stopTicking();
+          if (onError) onError(e.data);
         },
       },
     });

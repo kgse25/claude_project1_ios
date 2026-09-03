@@ -222,4 +222,19 @@ body {
   color: var(--text-dim);
 }
 
+.player-error {
+  padding: 20px 16px;
+  text-align: center;
+}
+.player-error p {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+.player-error a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
 #btn-toggle-complete.completed { color: var(--accent); }

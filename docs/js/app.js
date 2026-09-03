@@ -190,6 +190,12 @@
 
     const wrap = document.querySelector(".player-wrap");
     wrap.innerHTML = '<div id="yt-player"></div>';
+    wrap.hidden = false;
+
+    const errorEl = document.getElementById("player-error");
+    errorEl.hidden = true;
+    document.getElementById("player-error-link").href =
+      "https://www.youtube.com/watch?v=" + encodeURIComponent(workout.videoId);
 
     showView("player");
 
@@ -203,6 +209,10 @@
         workout.lastPositionSeconds = 0;
         save();
         updateCompleteButton(workout);
+      },
+      onError: () => {
+        wrap.hidden = true;
+        errorEl.hidden = false;
       },
     });
   }
