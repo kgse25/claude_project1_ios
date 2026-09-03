@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>GymTracker</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GymTracker">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0b0b0f">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===================== LIST VIEW ===================== -->
+  <section id="view-list" class="view">
+    <header class="topbar">
+      <h1>Программы</h1>
+      <button id="btn-add-program" class="icon-btn" aria-label="Добавить программу">+</button>
+    </header>
+    <div id="program-list" class="program-list"></div>
+    <div id="empty-state" class="empty-state" hidden>
+      <p>Пока нет программ.</p>
+      <p>Нажмите «+», чтобы добавить плейлист YouTube.</p>
+    </div>
+  </section>
+
+  <!-- ===================== ADD PROGRAM (overlay) ===================== -->
+  <section id="view-add" class="view overlay" hidden>
+    <header class="topbar">
+      <button id="btn-add-cancel" class="text-btn">Отмена</button>
+      <h1>Новая программа</h1>
+      <button id="btn-add-confirm" class="text-btn primary">Добавить</button>
+    </header>
+    <div class="form-body">
+      <label for="playlist-url-input">Ссылка на YouTube-плейлист</label>
+      <input id="playlist-url-input" type="url" inputmode="url" autocapitalize="off" autocorrect="off"
+             placeholder="https://www.youtube.com/playlist?list=...">
+      <div id="add-error" class="error-text" hidden></div>
+      <div id="add-spinner" class="spinner" hidden></div>
+    </div>
+  </section>
+
+  <!-- ===================== PROGRAM DETAIL VIEW ===================== -->
+  <section id="view-detail" class="view" hidden>
+    <header class="topbar">
+      <button class="icon-btn back-btn" data-back-to="list" aria-label="Назад">‹</button>
+      <h1 id="detail-title">Программа</h1>
+      <button id="btn-delete-program" class="icon-btn" aria-label="Удалить программу">🗑</button>
+    </header>
+    <div id="workout-grid" class="workout-grid"></div>
+  </section>
+
+  <!-- ===================== PLAYER VIEW ===================== -->
+  <section id="view-player" class="view" hidden>
+    <header class="topbar">
+      <button class="icon-btn back-btn" data-back-to="detail" aria-label="Назад">‹</button>
+      <h1 id="player-title">Тренировка</h1>
+      <button id="btn-toggle-complete" class="icon-btn" aria-label="Отметить пройденной">○</button>
+    </header>
+    <div class="player-wrap">
+      <div id="yt-player"></div>
+    </div>
+    <div id="player-error" class="player-error" hidden>
+      <p>Это видео нельзя воспроизвести здесь — владелец канала запретил встраивание на сторонних сайтах.</p>
+      <a id="player-error-link" href="#" target="_blank" rel="noopener">Открыть на YouTube ↗</a>
+    </div>
+    <div id="player-video-title" class="player-video-title"></div>
+  </section>
+
+  <script src="js/config.js" defer></script>
+  <script src="js/storage.js" defer></script>
+  <script src="js/youtube.js" defer></script>
+  <script src="js/player.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
